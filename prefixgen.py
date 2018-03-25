@@ -87,9 +87,16 @@ def prefixes_merge(prefixes_list):
 
 
 asset_regex = re.compile(r'(AS-\w*|as-\w*)')
-prefix_regex = re.compile(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\/\d{1,2}')
+prefix_regex = re.compile(r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/\d{1,2}')
 ripe_vault = []
 
 ripe_lookup(sys.argv[1])
 prefixes = list(filter(prefix_regex.match, ripe_vault))
 prefixes_merge(prefixes)
+
+'''
+from socket import inet_aton
+import struct
+list_of_ips = ['192.168.204.111', '192.168.99.11', '192.168.102.105']
+sorted(list_of_ips, key=lambda ip: struct.unpack("!L", inet_aton(ip))[0])
+'''
